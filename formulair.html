@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulaire de Contrôle de Saisie</title>
+  <style>
+    .error-message {
+      color: red;
+      font-size: 0.8em;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Formulaire de Contact - Jarditou</h2>
+
+  <form id="formulaireJarditou">
+    <label for="nom">Nom :</label>
+    <input type="text" id="nom" name="nom"><span class="error-message" id="error-nom"></span><br><br>
+    
+    <label for="email">Email :</label>
+    <input type="email" id="email" name="email"><span class="error-message" id="error-email"></span><br><br>
+    
+    <input type="submit" value="Envoyer">
+  </form>
+
+  <script>
+    document.getElementById("formulaireJarditou").addEventListener("submit", function(event){
+      event.preventDefault(); // Empêche le rechargement de la page
+      
+      // Récupération des valeurs des champs du formulaire
+      var nom = document.getElementById("nom").value.trim();
+      var email = document.getElementById("email").value.trim();
+      
+      // Validation des champs
+      var isValid = true;
+
+      // Validation du champ nom
+      if(nom === '') {
+        document.getElementById("error-nom").innerText = "Veuillez saisir votre nom";
+        isValid = false;
+      } else {
+        document.getElementById("error-nom").innerText = "";
+      }
+
+      // Validation du champ email
+      if(email === '') {
+        document.getElementById("error-email").innerText = "Veuillez saisir votre email";
+        isValid = false;
+      } else if (!isValidEmail(email)) {
+        document.getElementById("error-email").innerText = "Veuillez saisir une adresse email valide";
+        isValid = false;
+      } else {
+        document.getElementById("error-email").innerText = "";
+      }
+
+      // Envoi du formulaire si tout est valide
+      if(isValid) {
+        alert("Formulaire soumis avec succès !");
+        // Ici, vous pouvez envoyer le formulaire à votre serveur avec JavaScript ou effectuer d'autres actions nécessaires
+      }
+    });
+
+    // Fonction pour valider une adresse email
+    function isValidEmail(email) {
+      var re = /\S+@\S+\.\S+/;
+      return re.test(email);
+    }
+  </script>
+
+</body>
+</html>

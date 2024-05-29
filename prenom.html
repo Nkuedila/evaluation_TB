@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recherche de prénom</title>
+</head>
+<body>
+    <label for="prenomInput">Entrez un prénom :</label>
+    <input type="text" id="prenomInput">
+    <button onclick="rechercherEtSupprimer()">Rechercher et supprimer</button>
+    <p id="resultat"></p>
+
+    <script>
+        var tab = ["ali", "moussa", "cyril", "Jérémy", "Laurent", "Melik", "Nouara", "Salem", "Samuel", "Stéphane", "bunzi", "tarsier"];
+
+        function rechercherEtSupprimer() {
+            var prenom = document.getElementById("prenomInput").value;
+            var index = tab.indexOf(prenom);
+            var resultat = document.getElementById("resultat");
+
+            if (index !== -1) {
+                tab.splice(index, 1);
+                tab.push(" ");
+                resultat.textContent = "Le prénom " + prenom + " a été supprimé avec succès.";
+            } else {
+                resultat.textContent = "Le prénom " + prenom + " n'a pas été trouvé dans le tableau.";
+            }
+        }
+    </script>
+</body>
+</html>
